@@ -19,9 +19,9 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class Proyecto_Final implements ActionListener {
+public class Proyecto_Final{
 
-    /*
+   /*Probando el GUI, luego agrego las funciones del codigo a el.  
     private static JPanel panel;
     private static JFrame frame;
     private static JLabel label;
@@ -29,10 +29,10 @@ public class Proyecto_Final implements ActionListener {
     private static JLabel pass;
     private static JPasswordField p;
     private static JButton boton;
-    private static JLabel per;
+    private static JLabel per;*/
 
     public static void main(String[] args) {
-        panel = new JPanel();
+        /*panel = new JPanel();
         frame = new JFrame();
         frame.setSize(350, 200);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -67,77 +67,71 @@ public class Proyecto_Final implements ActionListener {
 
         frame.setVisible(true);*/
 
-       
-        List<Carro> inventario = inicializarInventario();
+        List<Carro> inv = Inventario();
 
-       
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Bienvenido al sistema de compra y venta de carros.");
+        System.out.println("Bienvenido Motomami's Company");
         System.out.println("1. Mostrar inventario completo.");
         System.out.println("2. Buscar carro por marca.");
-        System.out.println("3. Buscar carro por año.");
+        System.out.println("3. Buscar carro por anio.");
         System.out.println("4. Salir.");
-        System.out.print("Seleccione una opción: ");
+        System.out.print("Seleccione una opcion: ");
         int opcion = scanner.nextInt();
 
         switch (opcion) {
             case 1:
-                mostrarInventario(inventario);
+                mostrar(inv);
                 break;
             case 2:
                 System.out.print("Ingrese la marca: ");
                 String marca = scanner.next();
-                buscarPorMarca(inventario, marca);
+                marcac(inv, marca);
                 break;
             case 3:
-                System.out.print("Ingrese el año: ");
+                System.out.print("Ingrese el anio: ");
                 int anio = scanner.nextInt();
-                buscarPorAnio(inventario, anio);
+                anioc(inv, anio);
                 break;
             case 4:
                 System.out.println("Gracias por usar el sistema.");
                 break;
             default:
-                System.out.println("Opción inválida.");
+                System.out.println("Opción invalida.");
         }
     }
 
-    // Método para inicializar el inventario con 30 carros
-    private static List<Carro> inicializarInventario() {
+   
+    private static List<Carro> Inventario() {
         List<Carro> inventario = new ArrayList<>();
         inventario.add(new Carro("Toyota", "Corolla", 2015, 15000));
         inventario.add(new Carro("Honda", "Civic", 2018, 18000));
         inventario.add(new Carro("BMW", "X5", 2020, 50000));
-        // Añade más carros hasta llegar a 30
         return inventario;
     }
 
-    // Método para mostrar todo el inventario
-    private static void mostrarInventario(List<Carro> inventario) {
-        for (Carro carro : inventario) {
+    private static void mostrar(List<Carro> inv) {
+        for (Carro carro : inv) {
             System.out.println(carro);
         }
     }
 
-    // Método para buscar carros por marca
-    private static void buscarPorMarca(List<Carro> inventario, String marca) {
-        for (Carro carro : inventario) {
+    private static void marcac(List<Carro> inv, String marca) {
+        for (Carro carro : inv) {
             if (carro.getMarca().equalsIgnoreCase(marca)) {
                 System.out.println(carro);
             }
         }
     }
 
-    // Método para buscar carros por año
-    private static void buscarPorAnio(List<Carro> inventario, int anio) {
-        for (Carro carro : inventario) {
+    private static void anioc(List<Carro> inv, int anio) {
+        for (Carro carro : inv) {
             if (carro.getAnio() == anio) {
                 System.out.println(carro);
             }
         }
     }
 
-    @Override
+    /* @Override
     public void actionPerformed(ActionEvent e) {
         String us = u.getText();
         String pass = p.getText();
@@ -147,7 +141,7 @@ public class Proyecto_Final implements ActionListener {
         } else {
             per.setText("Wrong user or password");
         }
-    }
+    }*/
 }
 
 // Clase Carro
@@ -174,6 +168,6 @@ class Carro {
 
     @Override
     public String toString() {
-        return "Marca: " + marca + ", Modelo: " + modelo + ", Año: " + anio + ", Precio: $" + precio;
+        return "Marca: " + marca + ", Modelo: " + modelo + ", Anio: " + anio + ", Precio: " + precio;
     }
 }
