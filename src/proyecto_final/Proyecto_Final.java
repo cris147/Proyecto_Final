@@ -171,3 +171,33 @@ class Carro {
         return "Marca: " + marca + ", Modelo: " + modelo + ", Anio: " + anio + ", Precio: " + precio;
     }
 }
+
+
+/*Acciones o Funcionalidades
+Mostrar el inventario completo de carros.
+Buscar carros por marca.
+Buscar carros por anio.
+Salir del sistema.
+
+Elementos Utilizados
+Clases:
+Proyecto_Final
+Carro
+
+Estructuras de control:
+Condicional switch para manejar el menu de opciones.
+Bucles for para recorrer el inventario y realizar búsquedas.
+
+Colecciones:
+List<Carro> (ArrayList)
+
+Entradas y salidas:
+Scanner
+System.out.println.
+
+Métodos:
+Inventario, mostrar, marcac y anioc
+
+Interfaz gráfica (en proceso):
+JFrame, JPanel, JButton, JTextField, JPasswordField
+*/
