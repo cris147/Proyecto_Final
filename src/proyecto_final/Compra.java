@@ -35,7 +35,6 @@ public class Compra {
         panelDerecha.add(btnPorPrecio);
         panelDerecha.add(btnVerTodos);
 
-        // Botón para filtrar por marca
         btnPorMarca.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -43,7 +42,6 @@ public class Compra {
             }
         });
 
-        // Botón para filtrar por año
         btnPorAnio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -51,7 +49,6 @@ public class Compra {
             }
         });
 
-        // Botón para filtrar por precio
         btnPorPrecio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -59,7 +56,6 @@ public class Compra {
             }
         });
 
-        // Botón para ver todos los carros
         btnVerTodos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -75,13 +71,11 @@ public class Compra {
         panelDerecha.removeAll();
 
         String valor = "";
-        // Si no es el filtro "todos", pedimos el valor para el filtro
         if (!"todos".equals(filtro)) {
             valor = JOptionPane.showInputDialog("Ingrese el valor para el filtro:");
             if (valor == null || valor.trim().isEmpty()) return;
         }
 
-        // Recorrer el inventario y mostrar los carros que coinciden con el filtro
         for (Carro carro : inventario) {
             boolean coincide = false;
 
@@ -103,22 +97,14 @@ public class Compra {
                 btnComprar.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        // Verifica si el usuario tiene suficiente dinero para comprar el carro
                         if (Proyecto_Final.dinero >= carro.getPrecio()) {
-                            // Restamos el precio del carro del dinero disponible
                             Proyecto_Final.dinero -= carro.getPrecio();
-                            // Actualizamos el dinero gastado
                             Proyecto_Final.dineroGastado += carro.getPrecio();
-                            // Actualizamos la etiqueta de dinero disponible
                             dine.setText("Dinero disponible: $" + Proyecto_Final.dinero);
-                            // Agregamos el carro al inventario del usuario
                             carrosUsuario.add(carro);
-                            // Eliminamos el carro del inventario de la tienda
                             eliminarCarroDelInventario(carro);
-                            // Mostramos un mensaje de éxito
                             JOptionPane.showMessageDialog(null, "Compra exitosa de: " + carro.getMarca() + " " + carro.getModelo());
                         } else {
-                            // Si no tiene suficiente dinero, mostramos un mensaje
                             JOptionPane.showMessageDialog(null, "No tienes suficiente dinero.");
                         }
                     }

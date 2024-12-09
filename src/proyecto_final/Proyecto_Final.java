@@ -9,13 +9,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List; // Importar List
+import java.util.List; 
 
 public class Proyecto_Final {
-    private static List<Carro> inventario = crearInventario(); // Lista de carros en inventario
-    private static List<Carro> carrosUsuario = new ArrayList<>(); // Lista de carros comprados por el usuario
+    private static List<Carro> inventario = crearInventario(); 
+    private static List<Carro> carrosUsuario = new ArrayList<>(); 
     private static String usuarioNombre = "";
     public static double dinero = 50000;
     public static double dineroGastado = 0;
@@ -24,56 +23,45 @@ public class Proyecto_Final {
     private static JLabel dine;
 
     public static void main(String[] args) {
-        // Crear la ventana de bienvenida
         JFrame bienvenidaFrame = new JFrame("Motomami's Company");
         bienvenidaFrame.setSize(800, 400);
         bienvenidaFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         bienvenidaFrame.setLayout(new BorderLayout());
 
-        // Título de bienvenida
         JLabel bienvenidaLabel = new JLabel("BIENVENIDO A MOTOMAMI'S COMPANY", SwingConstants.CENTER);
         bienvenidaLabel.setFont(new Font("Arial", Font.BOLD, 30));
-        bienvenidaLabel.setForeground(Color.WHITE);
+        bienvenidaLabel.setForeground(Color.BLACK);
         bienvenidaFrame.add(bienvenidaLabel, BorderLayout.NORTH);
 
-        // Fondo de la ventana de bienvenida
-        bienvenidaFrame.getContentPane().setBackground(new Color(0, 102, 204));
+        bienvenidaFrame.getContentPane().setBackground(new Color(211, 211, 211));
 
-        // Logo (cargar imagen desde la URL)
-        String logoUrl = "https://i.ibb.co/vq85T0h/logo.png"; // URL de la imagen del logo
-        try {
-            URL url = new URL(logoUrl);
-            ImageIcon logoIcon = new ImageIcon(url);
-            Image logoImage = logoIcon.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH); // Ajustar tamaño
-            JLabel logoLabel = new JLabel(new ImageIcon(logoImage), SwingConstants.CENTER);
-            bienvenidaFrame.add(logoLabel, BorderLayout.CENTER);
-        } catch (IOException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(bienvenidaFrame, "No se pudo cargar el logo.");
-        }
+        
+        URL logoURL = Proyecto_Final.class.getResource("/Logo.png");
+        ImageIcon logoIcon = new ImageIcon("Logo.png");
+        JLabel logolabel = new JLabel("Logo.png");
+        logolabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // Campo para ingresar el nombre del usuario
+
         JPanel panelNombre = new JPanel();
         panelNombre.setLayout(new FlowLayout());
-        panelNombre.setBackground(new Color(0, 102, 204));
+        panelNombre.setBackground(new Color(211, 201, 211));
 
         JLabel nombreLabel = new JLabel("Ingrese su nombre:");
-        nombreLabel.setForeground(Color.WHITE);
+        nombreLabel.setForeground(Color.BLACK);
         JTextField nombreField = new JTextField(20);
         panelNombre.add(nombreLabel);
         panelNombre.add(nombreField);
         bienvenidaFrame.add(panelNombre, BorderLayout.SOUTH);
 
-        // Botón para continuar
         JButton btnEntrar = new JButton("Entrar");
-        btnEntrar.setBackground(new Color(255, 153, 51)); // Naranja
+        btnEntrar.setBackground(new Color(255, 153, 51));
         btnEntrar.setForeground(Color.WHITE);
         btnEntrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                usuarioNombre = nombreField.getText(); // Guardar el nombre ingresado
+                usuarioNombre = nombreField.getText(); 
                 if (!usuarioNombre.isEmpty()) {
-                    bienvenidaFrame.dispose(); // Cerrar la ventana de bienvenida
-                    mostrarMenu(); // Llamar al método para mostrar el menú principal
+                    bienvenidaFrame.dispose(); 
+                    mostrarMenu(); 
                 } else {
                     JOptionPane.showMessageDialog(bienvenidaFrame, "Por favor, ingrese su nombre.");
                 }
@@ -85,42 +73,39 @@ public class Proyecto_Final {
         bienvenidaFrame.setVisible(true);
     }
 
-    // Método para mostrar el menú principal después de la bienvenida
+    
+
     private static void mostrarMenu() {
         JFrame menuFrame = new JFrame("Motomami's Company");
         menuFrame.setSize(800, 400);
         menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         menuFrame.setLayout(new BorderLayout());
 
-        // Fondo del menú
         menuFrame.getContentPane().setBackground(new Color(240, 240, 240));
 
-        // Panel de dinero
         dine = new JLabel("Dinero disponible: $" + dinero);
         dine.setHorizontalAlignment(SwingConstants.CENTER);
         dine.setFont(new Font("Arial", Font.BOLD, 20));
         menuFrame.add(dine, BorderLayout.NORTH);
 
-        // Panel de búsqueda
         JPanel panelBusqueda = new JPanel();
         panelBusqueda.setLayout(new FlowLayout());
         panelBusqueda.setBackground(new Color(240, 240, 240));
         menuFrame.add(panelBusqueda, BorderLayout.SOUTH);
 
-        // Panel de opciones
         JPanel panelIzquierda = new JPanel();
         panelIzquierda.setLayout(new BoxLayout(panelIzquierda, BoxLayout.Y_AXIS));
-        panelIzquierda.setBackground(new Color(0, 102, 204));
-
+        panelIzquierda.setBackground(new Color(169, 169, 169));
+        
         JButton btnComprar = new JButton("Comprar Carros");
         JButton btnVender = new JButton("Vender Carros");
         JButton btnVerPerfil = new JButton("Ver Perfil");
         JButton btnSalir = new JButton("Salir");
 
-        btnComprar.setBackground(new Color(255, 153, 51));
-        btnVender.setBackground(new Color(255, 153, 51));
-        btnVerPerfil.setBackground(new Color(255, 153, 51));
-        btnSalir.setBackground(new Color(255, 153, 51));
+       btnComprar.setBackground(new Color(216, 168, 92));
+       btnVender.setBackground(new Color(216, 168, 92)); 
+       btnVerPerfil.setBackground(new Color(216, 168, 92)); 
+       btnSalir.setBackground(new Color(216, 168, 92)); 
 
         panelIzquierda.add(btnComprar);
         panelIzquierda.add(btnVender);
@@ -129,7 +114,6 @@ public class Proyecto_Final {
 
         menuFrame.add(panelIzquierda, BorderLayout.WEST);
 
-        // Panel de resultados
         JPanel panelResultados = new JPanel();
         panelResultados.setLayout(new BorderLayout());
         panelPequeno.setPreferredSize(new Dimension(300, 100));
@@ -142,7 +126,6 @@ public class Proyecto_Final {
         JScrollPane scrollPaneDerecha = new JScrollPane(panelResultados);
         menuFrame.add(scrollPaneDerecha, BorderLayout.CENTER);
 
-        // Acción para comprar carros
         btnComprar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Compra compra = new Compra(inventario, dine, carrosUsuario);
@@ -150,7 +133,6 @@ public class Proyecto_Final {
             }
         });
 
-        // Acción para vender carros
         btnVender.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 panelPequeno.removeAll();
@@ -161,7 +143,6 @@ public class Proyecto_Final {
             }
         });
 
-        // Acción para ver perfil
         btnVerPerfil.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Perfil perfil = new Perfil(dine, carrosUsuario, dineroGastado, dineroObtenido);
@@ -169,7 +150,6 @@ public class Proyecto_Final {
             }
         });
 
-        // Acción para salir
         btnSalir.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
