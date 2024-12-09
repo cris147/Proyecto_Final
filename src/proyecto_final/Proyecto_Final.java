@@ -30,31 +30,33 @@ public class Proyecto_Final {
 
         JLabel bienvenidaLabel = new JLabel("BIENVENIDO A MOTOMAMI'S COMPANY", SwingConstants.CENTER);
         bienvenidaLabel.setFont(new Font("Arial", Font.BOLD, 30));
-        bienvenidaLabel.setForeground(Color.BLACK);
+        bienvenidaLabel.setForeground(Color.WHITE);
         bienvenidaFrame.add(bienvenidaLabel, BorderLayout.NORTH);
-
-        bienvenidaFrame.getContentPane().setBackground(new Color(211, 211, 211));
+        bienvenidaFrame.getContentPane().setBackground(new Color(25, 25, 30));
+       
 
         
-        URL logoURL = Proyecto_Final.class.getResource("/Logo.png");
-        ImageIcon logoIcon = new ImageIcon("Logo.png");
-        JLabel logolabel = new JLabel("Logo.png");
-        logolabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-
+      ImageIcon logoIcon = new ImageIcon("C:\\Users\\BLINTEC\\Documents\\NetBeansProjects\\Proyecto_Final\\resources\\motomami.png");
+Image logoImage = logoIcon.getImage(); 
+Image scaledImage = logoImage.getScaledInstance(255, 255, Image.SCALE_SMOOTH);
+ImageIcon scaledLogoIcon = new ImageIcon(scaledImage);
+JLabel logoLabel = new JLabel(scaledLogoIcon);
+logoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+bienvenidaFrame.add(logoLabel, BorderLayout.CENTER);
 
         JPanel panelNombre = new JPanel();
         panelNombre.setLayout(new FlowLayout());
-        panelNombre.setBackground(new Color(211, 201, 211));
+        panelNombre.setBackground(new Color(25, 25, 30));
 
         JLabel nombreLabel = new JLabel("Ingrese su nombre:");
-        nombreLabel.setForeground(Color.BLACK);
+        nombreLabel.setForeground(Color.WHITE);
         JTextField nombreField = new JTextField(20);
         panelNombre.add(nombreLabel);
         panelNombre.add(nombreField);
         bienvenidaFrame.add(panelNombre, BorderLayout.SOUTH);
 
         JButton btnEntrar = new JButton("Entrar");
-        btnEntrar.setBackground(new Color(255, 153, 51));
+        btnEntrar.setBackground(new Color(204, 50, 51));
         btnEntrar.setForeground(Color.WHITE);
         btnEntrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -102,10 +104,15 @@ public class Proyecto_Final {
         JButton btnVerPerfil = new JButton("Ver Perfil");
         JButton btnSalir = new JButton("Salir");
 
-       btnComprar.setBackground(new Color(216, 168, 92));
-       btnVender.setBackground(new Color(216, 168, 92)); 
-       btnVerPerfil.setBackground(new Color(216, 168, 92)); 
-       btnSalir.setBackground(new Color(216, 168, 92)); 
+       btnComprar.setBackground(new Color(205, 25, 30));
+       btnVender.setBackground(new Color(205, 25, 30)); 
+       btnVerPerfil.setBackground(new Color(205, 25, 30)); 
+       btnSalir.setBackground(new Color(205, 25, 30)); 
+       
+       btnComprar.setForeground(Color.WHITE);
+    btnVender.setForeground(Color.WHITE);
+    btnVerPerfil.setForeground(Color.WHITE);
+    btnSalir.setForeground(Color.WHITE);
 
         panelIzquierda.add(btnComprar);
         panelIzquierda.add(btnVender);
