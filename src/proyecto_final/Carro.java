@@ -10,15 +10,13 @@ public class Carro {
     private int anio;
     private double precio;
 
-    // Constructor
-    public Carro(String marca, String modelo, int anio, double precio) {
+    public Carro(String marca, String modelo, int anio, String precio) {
         this.marca = marca;
         this.modelo = modelo;
         this.anio = anio;
-        this.precio = precio;
+        this.precio = Double.parseDouble(precio);
     }
 
-    // Métodos getter
     public String getMarca() {
         return marca;
     }
@@ -40,4 +38,3 @@ public class Carro {
         return marca + " " + modelo + " (" + anio + ") - $" + precio;
     }
 }
-

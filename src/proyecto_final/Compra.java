@@ -4,150 +4,156 @@
  */
 package proyecto_final;
 
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
 import java.util.List;
+import java.util.Iterator;
 
-/**
- *
- * @author BLINTEC
- */
-public class Compra{
-   
-    
+public class Compra {
     private List<Carro> inventario;
-    
-   public Compra(List<Carro> inventario){
-       this.inventario = inventario;
-   }
-   
-   public void MenuC() {
-       JFrame comprar  = new JFrame("Comprar Carros");
-       comprar.setSize(400,300);
-       comprar.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-       comprar.setLayout(new BoxLayout(comprar.getContentPane(), BoxLayout.Y_AXIS));
-       
-       JButton BMarca = new JButton("Buscar por marca");
-       JButton BAnio  = new JButton("Buscar por anio");
-       JButton BPrecio = new JButton("Buscar por precio");
-       
-       BMarca.addActionListener(new ActionListener(){
-       @Override
-        public void actionPerformed(ActionEvent arg0){
-           Marca();
-       }
-   
-   });
-   
-        BAnio.addActionListener(new ActionListener(){
+    private JLabel dine;
+    private List<Carro> carrosUsuario;
+
+    public Compra(List<Carro> inventario, JLabel dine, List<Carro> carrosUsuario) {
+        this.inventario = inventario;
+        this.dine = dine;
+        this.carrosUsuario = carrosUsuario;
+    }
+
+    public void MenuC(JPanel panelDerecha) {
+        panelDerecha.removeAll();
+
+        JButton btnPorMarca = new JButton("Filtrar por Marca");
+        JButton btnPorAnio = new JButton("Filtrar por Año");
+        JButton btnPorPrecio = new JButton("Filtrar por Precio");
+        JButton btnVerTodos = new JButton("Ver Todos");
+
+        panelDerecha.add(btnPorMarca);
+        panelDerecha.add(btnPorAnio);
+        panelDerecha.add(btnPorPrecio);
+        panelDerecha.add(btnVerTodos);
+
+        // Botón para filtrar por marca
+        btnPorMarca.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent arg0){
-                Anio();
+            public void actionPerformed(ActionEvent e) {
+                mostrarCarrosFiltrados(panelDerecha, "marca");
             }
         });
-        
-        BPrecio.addActionListener(new ActionListener(){
+
+        // Botón para filtrar por año
+        btnPorAnio.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent arg0){
-                Precio();
+            public void actionPerformed(ActionEvent e) {
+                mostrarCarrosFiltrados(panelDerecha, "anio");
             }
-        
         });
-   
-        comprar.add(BMarca);
-        comprar.add(BAnio);
-        comprar.add(BPrecio);
-        
-        
-        comprar.setVisible(true);
-   }
-    
-   private void Marca() {
-        String marca = JOptionPane.showInputDialog(null, "Ingrese la marca:");
-        if (marca != null && !marca.isEmpty()) {
-            StringBuilder resultado = new StringBuilder("Resultados de búsqueda:\n");
-            for (Carro carro : inventario) {
-                if (carro.getMarca().equalsIgnoreCase(marca)) {
-                    resultado.append(carro).append("\n");
-                }
-            }
-            Mostrar(resultado.toString());
-        }
-    }
-   
-   
-   private void Anio() {
-    String Anio = JOptionPane.showInputDialog(null, "Ingrese el año:");
-    if (Anio != null && !Anio.isEmpty()) {
-        boolean Num = true;
-        for (int i = 0; i < Anio.length(); i++) {
-            if (Anio.charAt(i) < '0' || Anio.charAt(i) >'9'){
-                Num = false;
-                break;
-            }
-            
-        }
-        if (Num) {
-            int anio = Integer.parseInt(Anio);
-            StringBuilder resultado = new StringBuilder("Resultados de búsqueda:\n");
-            for (Carro carro : inventario) {
-                if (carro.getAnio() == anio) {
-                    resultado.append(carro).append("\n");
-                }
-            }
-            Mostrar(resultado.toString());
-        } else {
-            JOptionPane.showMessageDialog(null, "Por favor, ingrese un año válido.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-}
 
-    private void Precio() {
-    String precio = JOptionPane.showInputDialog(null, "Ingrese el precio: ");
-  
-    if (precio != null && !precio.isEmpty()) {
-        boolean nm = true;
-        
-        // Verificar si el precio ingresado es válido (solo números)
-        for (int i = 0; i < precio.length(); i++) {
-            if (precio.charAt(i) < '0' || precio.charAt(i) > '9') {
-                nm = false;
-                break;
+        // Botón para filtrar por precio
+        btnPorPrecio.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mostrarCarrosFiltrados(panelDerecha, "precio");
             }
-        }
-        
-        if (nm) {
-            int pr = Integer.parseInt(precio);
-            if (pr >= 0) {
-                StringBuilder re = new StringBuilder("Resultado de búsqueda: \n");
-                boolean found = false; 
+        });
 
-                for (Carro carro : inventario) {
-                    if (carro.getPrecio() <= pr) {
-                        re.append(carro).append("\n");
-                        found = true;  
+        // Botón para ver todos los carros
+        btnVerTodos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mostrarCarrosFiltrados(panelDerecha, "todos");
+            }
+        });
+
+        panelDerecha.revalidate();
+        panelDerecha.repaint();
+    }
+
+    private void mostrarCarrosFiltrados(JPanel panelDerecha, String filtro) {
+        panelDerecha.removeAll();
+
+        String valor = "";
+        // Si no es el filtro "todos", pedimos el valor para el filtro
+        if (!"todos".equals(filtro)) {
+            valor = JOptionPane.showInputDialog("Ingrese el valor para el filtro:");
+            if (valor == null || valor.trim().isEmpty()) return;
+        }
+
+        // Recorrer el inventario y mostrar los carros que coinciden con el filtro
+        for (Carro carro : inventario) {
+            boolean coincide = false;
+
+            if ("marca".equals(filtro)) {
+                coincide = carro.getMarca().equalsIgnoreCase(valor);
+            } else if ("anio".equals(filtro)) {
+                coincide = Integer.toString(carro.getAnio()).equals(valor);
+            } else if ("precio".equals(filtro)) {
+                coincide = esNumero(valor) && carro.getPrecio() <= Integer.parseInt(valor);
+            } else if ("todos".equals(filtro)) {
+                coincide = true;
+            }
+
+            if (coincide) {
+                JPanel carroPanel = new JPanel(new BorderLayout());
+                JLabel carroLabel = new JLabel(carro.toString() + " - $" + carro.getPrecio());
+                JButton btnComprar = new JButton("Comprar");
+
+                btnComprar.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // Verifica si el usuario tiene suficiente dinero para comprar el carro
+                        if (Proyecto_Final.dinero >= carro.getPrecio()) {
+                            // Restamos el precio del carro del dinero disponible
+                            Proyecto_Final.dinero -= carro.getPrecio();
+                            // Actualizamos el dinero gastado
+                            Proyecto_Final.dineroGastado += carro.getPrecio();
+                            // Actualizamos la etiqueta de dinero disponible
+                            dine.setText("Dinero disponible: $" + Proyecto_Final.dinero);
+                            // Agregamos el carro al inventario del usuario
+                            carrosUsuario.add(carro);
+                            // Eliminamos el carro del inventario de la tienda
+                            eliminarCarroDelInventario(carro);
+                            // Mostramos un mensaje de éxito
+                            JOptionPane.showMessageDialog(null, "Compra exitosa de: " + carro.getMarca() + " " + carro.getModelo());
+                        } else {
+                            // Si no tiene suficiente dinero, mostramos un mensaje
+                            JOptionPane.showMessageDialog(null, "No tienes suficiente dinero.");
+                        }
                     }
-                }
-                
-                if (!found) {
-                    re.append("No se encontraron carros con ese precio.\n");
-                }
+                });
 
-                Mostrar(re.toString()); 
-            } else {
-                JOptionPane.showMessageDialog(null, "El precio no puede ser negativo.");
+                carroPanel.add(carroLabel, BorderLayout.CENTER);
+                carroPanel.add(btnComprar, BorderLayout.SOUTH);
+                panelDerecha.add(carroPanel);
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Por favor, ingrese un precio válido.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        JButton btnVolver = new JButton("Volver al menú de compra");
+        btnVolver.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MenuC(panelDerecha);
+            }
+        });
+        panelDerecha.add(btnVolver);
+
+        panelDerecha.revalidate();
+        panelDerecha.repaint();
+    }
+
+    private void eliminarCarroDelInventario(Carro carro) {
+        Iterator<Carro> iterator = inventario.iterator();
+        while (iterator.hasNext()) {
+            if (iterator.next().equals(carro)) {
+                iterator.remove();
+                break;
+            }
         }
     }
-}
 
-    
-    private void Mostrar(String mensaje){
-            JOptionPane.showMessageDialog(null, mensaje,"Resultados", JOptionPane.INFORMATION_MESSAGE);
+    private boolean esNumero(String str) {
+        return str.matches("\\d+");
     }
-    
-    
 }
