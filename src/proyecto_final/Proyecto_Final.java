@@ -37,12 +37,12 @@ public class Proyecto_Final {
 
         
       ImageIcon logoIcon = new ImageIcon("C:\\Users\\BLINTEC\\Documents\\NetBeansProjects\\Proyecto_Final\\resources\\motomami.png");
-Image logoImage = logoIcon.getImage(); 
-Image scaledImage = logoImage.getScaledInstance(255, 255, Image.SCALE_SMOOTH);
-ImageIcon scaledLogoIcon = new ImageIcon(scaledImage);
-JLabel logoLabel = new JLabel(scaledLogoIcon);
-logoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-bienvenidaFrame.add(logoLabel, BorderLayout.CENTER);
+      Image logoImage = logoIcon.getImage(); 
+      Image scaledImage = logoImage.getScaledInstance(255, 255, Image.SCALE_SMOOTH);
+      ImageIcon scaledLogoIcon = new ImageIcon(scaledImage);
+      JLabel logoLabel = new JLabel(scaledLogoIcon);
+      logoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+      bienvenidaFrame.add(logoLabel, BorderLayout.CENTER);
 
         JPanel panelNombre = new JPanel();
         panelNombre.setLayout(new FlowLayout());
@@ -58,6 +58,7 @@ bienvenidaFrame.add(logoLabel, BorderLayout.CENTER);
         JButton btnEntrar = new JButton("Entrar");
         btnEntrar.setBackground(new Color(204, 50, 51));
         btnEntrar.setForeground(Color.WHITE);
+        
         btnEntrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 usuarioNombre = nombreField.getText(); 
@@ -104,15 +105,15 @@ bienvenidaFrame.add(logoLabel, BorderLayout.CENTER);
         JButton btnVerPerfil = new JButton("Ver Perfil");
         JButton btnSalir = new JButton("Salir");
 
-       btnComprar.setBackground(new Color(205, 25, 30));
-       btnVender.setBackground(new Color(205, 25, 30)); 
-       btnVerPerfil.setBackground(new Color(205, 25, 30)); 
-       btnSalir.setBackground(new Color(205, 25, 30)); 
+       btnComprar.setBackground(new Color(25, 25, 30));
+       btnVender.setBackground(new Color(25, 25, 30)); 
+       btnVerPerfil.setBackground(new Color(25, 25, 30)); 
+       btnSalir.setBackground(new Color(25, 25, 30)); 
        
        btnComprar.setForeground(Color.WHITE);
-    btnVender.setForeground(Color.WHITE);
-    btnVerPerfil.setForeground(Color.WHITE);
-    btnSalir.setForeground(Color.WHITE);
+       btnVender.setForeground(Color.WHITE);
+       btnVerPerfil.setForeground(Color.WHITE);
+       btnSalir.setForeground(Color.WHITE);
 
         panelIzquierda.add(btnComprar);
         panelIzquierda.add(btnVender);
@@ -173,6 +174,10 @@ bienvenidaFrame.add(logoLabel, BorderLayout.CENTER);
         inventario.add(new Carro("Tesla", "Model 3", 2022, "40000"));
         inventario.add(new Carro("Ferrari", "488 GTB", 2018, "180000"));
         inventario.add(new Carro("Chevrolet", "Camaro", 2019, "30000"));
+        inventario.add(new Carro("Toyota", "Supra", 2001, "46500"));
+        inventario.add(new Carro("Lamborghini", "Revuelto", 2024, "650000"));
+        inventario.add(new Carro("Ford", "Mustang", 1972, "72500"));
+        inventario.add(new Carro("Dodge", "Charger", 2023, "32500"));
         return inventario;
     }
 

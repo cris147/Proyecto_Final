@@ -66,7 +66,7 @@ public class Venta {
                 String precio = txtPrecio.getText();
 
                 if (!marca.isEmpty() && !anio.isEmpty() && !precio.isEmpty()) {
-                    if (esNumero(precio)) {
+                    if (num(precio)) {
                         double precioDouble = Double.parseDouble(precio);
                         Carro carroVendido = new Carro(marca, "", Integer.parseInt(anio), precio);
                         Proyecto_Final.dinero += precioDouble * 0.88;
@@ -84,7 +84,7 @@ public class Venta {
         });
     }
 
-    private boolean esNumero(String str) {
+    private boolean num(String str) {
         if (str == null || str.isEmpty()) {
             return false;
         }

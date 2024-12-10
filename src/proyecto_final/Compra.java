@@ -102,7 +102,7 @@ public class Compra {
                             Proyecto_Final.dineroGastado += carro.getPrecio();
                             dine.setText("Dinero disponible: $" + Proyecto_Final.dinero);
                             carrosUsuario.add(carro);
-                            eliminarCarroDelInventario(carro);
+                            eliminar(carro);
                             JOptionPane.showMessageDialog(null, "Compra exitosa de: " + carro.getMarca() + " " + carro.getModelo());
                         } else {
                             JOptionPane.showMessageDialog(null, "No tienes suficiente dinero.");
@@ -129,7 +129,7 @@ public class Compra {
         panelDerecha.repaint();
     }
 
-    private void eliminarCarroDelInventario(Carro carro) {
+    private void eliminar(Carro carro) {
         Iterator<Carro> iterator = inventario.iterator();
         while (iterator.hasNext()) {
             if (iterator.next().equals(carro)) {
